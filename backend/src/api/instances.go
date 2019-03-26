@@ -3,6 +3,9 @@ package api
 import (
 	"fmt"
 	"time"
+        // Eric add hostname
+        "net"
+        // End Eric add hostname
 
 	"github.com/satori/go.uuid"
 	"gopkg.in/mgutz/dat.v1"
@@ -113,10 +116,15 @@ func (api *API) RegisterInstance(instanceID, instanceIP, instanceVersion, appID,
 		_ = tx.AutoRollback()
 	}()
 
+        // Eric add hostname
+        var instanceNAME
+        instanceNAME, err := net.LookupAddr(instanceIP)
+        // End Eric add hostname
+
 	result, err := tx.
 		Upsert("instance").
-		Columns("id", "ip").
-		Values(instanceID, instanceIP).
+		Columns("id", "ip", "hostname").
+		Values(instanceID, instanceIP, instanceNAME).
 		Where("id = $1", instanceID).
 		Exec()
 
