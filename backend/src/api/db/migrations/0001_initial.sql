@@ -97,6 +97,7 @@ create index on groups (channel_id);
 create table instance (
 	id varchar(50) primary key check (id <> ''),
 	ip inet not null,
+        hostname varchar(50) default 'unresolvable',
 	created_ts timestamptz default current_timestamp not null
 );
 
