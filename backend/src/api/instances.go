@@ -55,7 +55,6 @@ type Instance struct {
 	IP          string              `db:"ip" json:"ip"`
 	Hostname    string              `db:"hostname" json:"hostname"`
 	CreatedTs   time.Time           `db:"created_ts" json:"created_ts"`
-	Hostname    string              `db:"hostname" json:"hostname"`
 	Application InstanceApplication `db:"application" json:"application,omitempty"`
 }
 
