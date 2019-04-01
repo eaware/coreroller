@@ -51,6 +51,7 @@ class List extends React.Component {
       <div className="coreRollerTable">
         <div className="coreRollerTable-header">
           <div className="coreRollerTable-cell">IP</div>
+          <div className="coreRollerTable-cell">Hostname</div>
           <div className="coreRollerTable-cell coreRollerTable-cell--medium">Instance ID</div>
           <div className="coreRollerTable-cell">Current status</div>
           <div className="coreRollerTable-cell">Version</div>
