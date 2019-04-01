@@ -47,6 +47,7 @@ class List extends React.Component {
           return cleanSemverVersion(version.version)
         })).sort(semver.rcompare)
 
+    console.log(this.props.instance)
     return(
       <div className="coreRollerTable">
         <div className="coreRollerTable-header">
