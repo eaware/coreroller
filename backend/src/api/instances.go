@@ -117,14 +117,15 @@ func (api *API) RegisterInstance(instanceID, instanceIP, instanceVersion, appID,
 	}()
 
         // Eric add hostname
-        // var instanceNAME
-        instanceNAME, err := net.LookupAddr(instanceIP)
+        // var instanceName
+        instanceName, err := net.LookupAddr(instanceIP)
+        instanceName := strings.TrimRight(instanceName, ".")
         // End Eric add hostname
 
 	result, err := tx.
 		Upsert("instance").
 		Columns("id", "ip", "hostname").
-		Values(instanceID, instanceIP, instanceNAME).
+		Values(instanceID, instanceIP, instanceName).
 		Where("id = $1", instanceID).
 		Exec()
 
