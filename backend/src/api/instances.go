@@ -120,7 +120,7 @@ func (api *API) RegisterInstance(instanceID, instanceIP, instanceVersion, appID,
         // Eric add hostname
         // var instanceName
         instanceName, err := net.LookupAddr(instanceIP)
-        instanceName := strings.TrimRight(instanceName, ".")
+        instanceName := strings.TrimRight(string(instanceName), ".")
         // End Eric add hostname
 
 	result, err := tx.
