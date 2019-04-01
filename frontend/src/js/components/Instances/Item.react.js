@@ -92,6 +92,9 @@ class Item extends React.Component {
               &nbsp;<i className="fa fa-caret-right"></i>
             </p>
           </div>
+          <div className="coreRollerTable-cell">
+            <p>{this.props.instance.hostname}</p>
+          </div>
           <div className="coreRollerTable-cell coreRollerTable-cell--medium">
             <p>{this.props.instance.id}</p>
           </div>
