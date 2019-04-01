@@ -95,13 +95,13 @@ class Item extends React.Component {
           <div className="coreRollerTable-cell">
             <p>{this.props.instance.hostname}</p>
           </div>
-          <div className="coreRollerTable-cell coreRollerTable-cell--medium">
+          <div className="coreRollerTable-cell">
             <p>{this.props.instance.id}</p>
           </div>
           <div className="coreRollerTable-cell">
             {instanceLabel}
           </div>
-          <div className="coreRollerTable-cell">
+          <div className="coreRollerTable-cell coreRollerTable-cell--small">
             <p className={"box--" + versionStyle}>{version}</p>
           </div>
           <div className="coreRollerTable-cell">
