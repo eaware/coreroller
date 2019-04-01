@@ -184,6 +184,8 @@ create table package_channel_blacklist (
 	primary key (package_id, channel_id)
 );
 
+alter table instance add column hostname varchar(50) default 'unresolvable';
+
 -- Initial data
 
 -- Default team and user (admin/admin)
