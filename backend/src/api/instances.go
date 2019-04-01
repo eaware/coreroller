@@ -5,6 +5,7 @@ import (
 	"time"
         // Eric add hostname
         "net"
+        "strings"
         // End Eric add hostname
 
 	"github.com/satori/go.uuid"
