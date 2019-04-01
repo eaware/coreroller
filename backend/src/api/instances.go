@@ -55,6 +55,7 @@ const (
 type Instance struct {
 	ID          string              `db:"id" json:"id"`
 	IP          string              `db:"ip" json:"ip"`
+	Hostname    string              `db:"hostname" json:"hostname"`
 	CreatedTs   time.Time           `db:"created_ts" json:"created_ts"`
 	Application InstanceApplication `db:"application" json:"application,omitempty"`
 }
