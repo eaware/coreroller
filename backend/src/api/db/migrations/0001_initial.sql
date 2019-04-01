@@ -97,7 +97,7 @@ create index on groups (channel_id);
 create table instance (
 	id varchar(50) primary key check (id <> ''),
 	ip inet not null,
-        hostname varchar(50) default 'unresolvable',
+	hostname varchar(50) default 'unresolvable',
 	created_ts timestamptz default current_timestamp not null
 );
 
@@ -183,8 +183,6 @@ create table package_channel_blacklist (
 	channel_id uuid not null references channel (id) on delete cascade,
 	primary key (package_id, channel_id)
 );
-
-alter table instance add column hostname varchar(50) default 'unresolvable';
 
 -- Initial data
 
