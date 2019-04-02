@@ -29,16 +29,21 @@ const (
 )
 
 var (
-    	coreosUpdatesURL = "https://public.update.core-os.net/v1/update/"
-	if len(os.Getenv("UPDATESERVER")) > 0 {
-    		coreosUpdatesURL = "https://" + os.Getenv("UPDATESERVER") + "/v1/update/"
-	}
+	coreosUpdatesURL = getCoreOSUpdateURL()
 	logger = log.New("syncer")
 
 	// ErrInvalidAPIInstance error indicates that no valid api instance was
 	// provided to the syncer constructor.
 	ErrInvalidAPIInstance = errors.New("invalid api instance")
 )
+
+func getCoreOSUpdateURL () string {
+    	coreosUpdatesURL = "https://public.update.core-os.net/v1/update/"
+        if len(os.Getenv("UPDATESERVER")) > 0 {
+                coreosUpdatesURL = "https://" + os.Getenv("UPDATESERVER") + "/v1/update/"
+        }
+	return coreosUpdatesURL
+}
 
 // Syncer represents a process in charge of checking for updates in the
 // different official CoreOS channels and updating the CoreOS application in
