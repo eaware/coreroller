@@ -22,12 +22,14 @@ import (
 	"gopkg.in/mgutz/dat.v1"
 )
 
+if len(os.Getenv("UPDATESERVER")) > 0 {
+    generatedcoreosUpdatesURL = "https://" + os.Getenv("UPDATESERVER") + "/v1/update/"
+} else {
+    generatedcoreosUpdatesURL = "https://public.update.core-os.net/v1/update/"
+}
+
 const (
-        if len(os.Getenv("UPDATESERVER")) > 0 {
-	    coreosUpdatesURL = "https://" + os.Getenv("UPDATESERVER") + "/v1/update/"
-        } else {
-	    coreosUpdatesURL = "https://public.update.core-os.net/v1/update/"
-        }
+	coreosUpdatesURL = generatedcoreosUpdatesURL
 	coreosAppID      = "{e96281a6-d1af-4bde-9a0a-97b76e56dc57}"
 	checkFrequency   = 1 * time.Hour
 )
