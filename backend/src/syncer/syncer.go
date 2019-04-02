@@ -37,12 +37,12 @@ var (
 	ErrInvalidAPIInstance = errors.New("invalid api instance")
 )
 
-func getCoreOSUpdateURL () string {
-    	coreosUpdatesURL = "https://public.update.core-os.net/v1/update/"
+func getCoreOSUpdateURL() string {
+    	output := "https://public.update.core-os.net/v1/update/"
         if len(os.Getenv("UPDATESERVER")) > 0 {
-                coreosUpdatesURL = "https://" + os.Getenv("UPDATESERVER") + "/v1/update/"
+                output = "https://" + os.Getenv("UPDATESERVER") + "/v1/update/"
         }
-	return coreosUpdatesURL
+	return output
 }
 
 // Syncer represents a process in charge of checking for updates in the
