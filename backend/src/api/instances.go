@@ -117,11 +117,7 @@ func (api *API) RegisterInstance(instanceID, instanceIP, instanceVersion, appID,
 	}()
 
 	instanceN, err := net.LookupAddr(instanceIP)
-	instanceLen := len(instanceN)
-	if instanceLen > 0 && instanceN[instanceLen-1] == "." {
-		instanceN = instanceN[:instanceLen-1]
-	}
-	instanceName := strings.Join(instanceN, "")
+	instanceName := strings.TrimRight(strings.Join(instanceN, ""), ".")
 
 	result, err := tx.
 		Upsert("instance").
