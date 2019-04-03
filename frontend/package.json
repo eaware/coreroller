@@ -43,12 +43,15 @@
     "watch-css": "lessc src/style/styles.less > ./built/css/styles.css",
     "watch-js": "watchify src/js/main.js -o ./built/js/main.js -dv",
     "watch": "npm run watch-css && npm run watch-js",
-    "build-css":
-      "lessc --clean-css src/style/styles.less >  built/css/styles.css",
+    "build-css": "lessc --clean-css src/style/styles.less >  built/css/styles.css",
     "build-js": "browserify -g uglifyify src/js/*.js > ./built/js/main.js",
     "build": "npm run build-css & npm run build-js && npm run copy-css"
   },
   "browserify": {
-    "transform": ["babelify", "reactify", "envify"]
+    "transform": [
+      "babelify",
+      "reactify",
+      "envify"
+    ]
   }
 }

@@ -22,19 +22,28 @@ import (
 	"gopkg.in/mgutz/dat.v1"
 )
 
+
 const (
-	coreosUpdatesURL = "https://public.update.core-os.net/v1/update/"
 	coreosAppID      = "{e96281a6-d1af-4bde-9a0a-97b76e56dc57}"
 	checkFrequency   = 1 * time.Hour
 )
 
 var (
+	coreosUpdatesURL = getCoreOSUpdateURL()
 	logger = log.New("syncer")
 
 	// ErrInvalidAPIInstance error indicates that no valid api instance was
 	// provided to the syncer constructor.
 	ErrInvalidAPIInstance = errors.New("invalid api instance")
 )
+
+func getCoreOSUpdateURL() string {
+    	output := "https://public.update.core-os.net/v1/update/"
+        if len(os.Getenv("UPDATESERVER")) > 0 {
+                output = "https://" + os.Getenv("UPDATESERVER") + "/v1/update/"
+        }
+	return output
+}
 
 // Syncer represents a process in charge of checking for updates in the
 // different official CoreOS channels and updating the CoreOS application in

@@ -2,9 +2,11 @@ package api
 
 import (
 	"fmt"
+	"net"
+	"strings"
 	"time"
 
-	"github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
 	"gopkg.in/mgutz/dat.v1"
 )
 
@@ -51,6 +53,7 @@ const (
 type Instance struct {
 	ID          string              `db:"id" json:"id"`
 	IP          string              `db:"ip" json:"ip"`
+	Hostname    string              `db:"hostname" json:"hostname"`
 	CreatedTs   time.Time           `db:"created_ts" json:"created_ts"`
 	Application InstanceApplication `db:"application" json:"application,omitempty"`
 }
@@ -113,10 +116,17 @@ func (api *API) RegisterInstance(instanceID, instanceIP, instanceVersion, appID,
 		_ = tx.AutoRollback()
 	}()
 
+	instanceN, err := net.LookupAddr(instanceIP)
+	instanceLen := len(instanceN)
+	if instanceLen > 0 && instanceN[instanceLen-1] == "." {
+		instanceN = instanceN[:instanceLen-1]
+	}
+	instanceName := strings.Join(instanceN, "")
+
 	result, err := tx.
 		Upsert("instance").
-		Columns("id", "ip").
-		Values(instanceID, instanceIP).
+		Columns("id", "ip", "hostname").
+		Values(instanceID, instanceIP, instanceName).
 		Where("id = $1", instanceID).
 		Exec()
 
