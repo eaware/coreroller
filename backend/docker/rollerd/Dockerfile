@@ -31,11 +31,19 @@ RUN apk --no-cache add git \
     && npm run build
 
 FROM alpine:3.8
-RUN apk --no-cache add ca-certificates tzdata \
-    && mkdir -p /coreroller/static
 
+RUN apk --no-cache add ca-certificates tzdata curl \
+    && mkdir -p /coreroller/static \
+    && /usr/bin/c_rehash /etc/ssl/certs
+
+COPY KPN.pem  /etc/ssl/certs
 COPY --from=builder /build/coreroller/backend/bin/rollerd /coreroller/
 COPY --from=assets /build/coreroller/frontend/built/ /coreroller/static/
+
+# workarround due to bug in update-ca-certificates
+# WARNING: ca-certificates.crt does not contain exactly one certificate or CRL: skipping
+
+RUN cat /etc/ssl/certs/KPN.pem >> /etc/ssl/certs/ca-certificates.crt
 
 ENV COREROLLER_DB_URL "postgres://postgres@postgresqld.local:5432/coreroller?sslmode=disable"
 EXPOSE 8000
