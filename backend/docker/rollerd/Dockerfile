@@ -31,6 +31,7 @@ RUN apk --no-cache add git \
     && npm run build
 
 FROM alpine:3.8
+COPY KPN.pem  /etc/ssl/certs
 
 RUN apk --no-cache add ca-certificates tzdata curl \
     && mkdir -p /coreroller/static \
